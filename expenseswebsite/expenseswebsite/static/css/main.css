@@ -74,3 +74,57 @@
   .bd-mode-toggle .dropdown-menu .active .bi {
     display: block !important;
   }
+
+  .content{
+    padding: 220px;
+  }
+
+  .text-color{
+    color: white;
+  }
+  .card-body{
+    height: 300px;
+    background-color: yellow;
+    padding: 0%;
+    /* margin: 0%; */
+    border: none;
+  }
+  .padding-all{
+    margin: 10px 30px 10px 10px;
+    /* padding-right: 30px; */
+  }
+  .register-heading{
+    margin:0;
+    padding:0;
+    text-align: center;
+    background-color: blue;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+  .input-field{
+    padding-right:0  30px;
+    margin: 12px 0px 0px 0px;
+    width: 80%;
+
+  }
+  .form-group{
+    align-items: center;
+  }
+  .register-button{
+    width: 50%;
+    /* margin: 0px 0px 0px 0px; */
+  }
+  .form-group{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 20vh;
+  }
+  .radius{
+    border-radius: 15px;
+  }
+  .checkered-background {
+    background-image: linear-gradient(to top, rgb(0, 26, 255), rgb(51, 160, 223), rgb(25, 129, 177), rgb(34, 89, 209));
+  }
+
