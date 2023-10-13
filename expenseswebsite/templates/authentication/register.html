@@ -1,0 +1,75 @@
+{% extends 'base_auth.html' %}
+{%load static%}
+
+{% block header %}
+<link href="{% static 'css/main.css'%}" rel="stylesheet" crossorigin="anonymous">
+<link href="{% static 'css/registerform.scss'%}" rel="stylesheet" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{%endblock%}
+{% block content %}
+<!-- <div class="row content">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="card  card-body radius">
+            <div class="register-heading">
+                <h4 class="text-color register-heading">Register for free account</h4>
+            </div>
+                <form action="" method="post">
+                    <div class="form-group">
+                        <input type="text" name="username" id="usernameField" placeholder="username" class=" form-control form-control-sm input-field radius">
+                        <input type="email" name="email" id="emailField" placeholder="Email" class=" form-control form-control-sm input-field radius">
+                        <input type="password" name="password" id="passwordField" placeholder="password" class=" form-control form-control-sm input-field radius">
+                        <small class="float-right">SHOW</small>
+                        <input type="submit" value="Register" class="btn btn-block btn-primary register-button radius">
+                    </div>
+                </form>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div> -->
+
+
+<div class="form_wrapper">
+    <div class="form_container">
+        <div class="title_container">
+            <h2>Responsive Registration Form</h2>
+        </div>
+        <div class="row clearfix">
+            <div class="">
+                <form>
+                    <!-- <input type="text" name="username" id="usernameField" placeholder="username" class=" form-control form-control-sm input-field radius">
+                        <input type="email" name="email" id="emailField" placeholder="Email" class=" form-control form-control-sm input-field radius">
+                        <input type="password" name="password" id="passwordField" placeholder="password" class=" form-control form-control-sm input-field radius">
+                        <small class="float-right">SHOW</small>
+                        <input type="submit" value="Register" class="btn btn-block btn-primary register-button radius"> -->
+    <!-- username -->
+                    <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                        <input type="text" name="username" id="usernameField" placeholder="username" required />
+                    </div>
+                    <div class="invalid_feedback invalid_feedback" style="display: none;">
+                        <p></p>
+                    </div>
+    <!-- email -->
+                    <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+                        <input type="email" name="email" id="emailField" placeholder="Email" required />
+                    </div>
+    <!-- password -->
+                    <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                        <input type="password" name="password" id="passwordField" placeholder="Password" required />
+                    </div>
+                    <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                        <input type="password" name="password" id="confirmPasswordField" placeholder="Confirm Password" required />
+                    </div>
+                    <div class="password_missmatch" style="display: none;">
+                        <p></p>
+                    </div>
+                    <small class="float-right" id="showPassword">SHOW</small>
+    <!-- register button -->
+                    <input class="button" type="submit" value="Register" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/register.js' %}"></script>
+{% endblock %}
