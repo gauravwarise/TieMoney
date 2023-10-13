@@ -23,7 +23,6 @@ class UsernameValidationView(View):
                     status=409)
         return JsonResponse({'username_valid':True})
 
-
 class RegistrationView(View):
     def get(self, request):
         return render(request, 'authentication/register.html') 
