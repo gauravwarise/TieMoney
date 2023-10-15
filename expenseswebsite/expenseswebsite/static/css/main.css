@@ -102,7 +102,8 @@
   
   .form_wrapper {
     background: #fff;
-    width: 400px;
+    width: 600px;
+    height: 500px;
     max-width: 100%;
     box-sizing: border-box;
     padding: 25px;
@@ -157,8 +158,8 @@
   .form_wrapper .input_field {
     position: relative;
     margin-bottom: 20px;
+    /* height: 50px; */
   }
-  
   .form_wrapper .input_field > span {
     position: absolute;
     left: 0;
@@ -175,7 +176,7 @@
   .form_wrapper .input_field input[type="password"] {
     width: 100%;
     padding: 8px 10px 9px 35px;
-    height: 35px;
+    height: 50px;
     border: 1px solid var(--grey);
     box-sizing: border-box;
     outline: none;
@@ -198,7 +199,7 @@
   
   .form_wrapper input[type="submit"] {
     background: var(--yellow);
-    height: 35px;
+    height: 50px;
     line-height: 35px;
     width: 100%;
     border: none;
@@ -283,3 +284,7 @@
   #showPassword:hover{
     cursor: pointer;
   }
+  .form_wrapper .input_field > span > i {
+    font-size: 1.5em;  /* Adjust this value to your preference */
+    margin-top: 13px;
+}
