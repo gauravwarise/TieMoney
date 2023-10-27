@@ -5,7 +5,11 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User
 # import validate_email 
 from validate_email import validate_email
+from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+from django.utils.http import urlsafe_base64_decode
+
 from django.contrib import messages
+from django.core.mail import EmailMessage
 # Create your views here.
 
 class EmailValidationView(View):
@@ -69,7 +73,23 @@ class RegistrationView(View):
                 user.set_password(password)
                 user.save()
                 messages.success(request, 'Account succesfully created')
-                return render(request, 'authentication/register.html') 
-                
-
+                return redirect('authentication/login.html') 
+            else:
+                messages.error(request, 'Email already exists')
+        else:
+            messages.error(request, 'Username already exists')    
         return render(request, 'authentication/register.html') 
+
+
+class VerificationView(View):
+    def get(self, request, uidb64, token):
+        try:
+            id = force_text(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=id)
+        except Exception as ex:
+            pass
+        return redirect('login')
+
+class LoginView(View):
+    def get(self, request):
+        return render(request, "authentication/login.html")
