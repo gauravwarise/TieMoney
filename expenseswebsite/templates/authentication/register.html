@@ -36,7 +36,9 @@
         </div>
         <div class="row clearfix">
             <div class="">
-                <form>
+                <form action="{% url 'register' %}" method="post">
+                    {% csrf_token %}
+                    {% include 'partials/_messages.html' %}
                     <!-- <input type="text" name="username" id="usernameField" placeholder="username" class=" form-control form-control-sm input-field radius">
                         <input type="email" name="email" id="emailField" placeholder="Email" class=" form-control form-control-sm input-field radius">
                         <input type="password" name="password" id="passwordField" placeholder="password" class=" form-control form-control-sm input-field radius">
@@ -44,14 +46,14 @@
                         <input type="submit" value="Register" class="btn btn-block btn-primary register-button radius"> -->
     <!-- username -->
                     <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                        <input type="text" name="username" id="usernameField" placeholder="username" required />
+                        <input type="text" name="username" id="usernameField" placeholder="username" value="{{fieldValues.username}}" required/>
                     </div>
                     <div class="invalid_feedback invalid_feedback" style="display: none;">
                         <p></p>
                     </div>
     <!-- email -->
                     <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-                        <input type="email" name="email" id="emailField" placeholder="Email" required />
+                        <input type="email" name="email" id="emailField" placeholder="Email" value="{{fieldValues.email}}" required/>
                     </div>
     <!-- password -->
                     <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
@@ -65,7 +67,7 @@
                     </div>
                     <small class="float-right" id="showPassword">SHOW</small>
     <!-- register button -->
-                    <input class="button" type="submit" value="Register" />
+                    <input class="button submit-btn" type="submit" value="Register" />
                 </form>
             </div>
         </div>
