@@ -2,9 +2,38 @@
 
 {% block content %}
 
-<h5>
-    Prefered Currency
-</h5>
+<div class="container mt-3">
+    <h5>Prefered Currency</h5>
+    {% include 'partials/_messages.html' %}
+    <!-- <form action="{% url 'preferences' %}" method="post">
+        {% csrf_token %}
+        <div class="input-group">
+            <select class="form-select" id="inputGroupSelect04" name="currecy" aria-label="Example select with button addon">
+                {% if user_preferences.currency %}
+                <option  name="currecy" selected value="{{user_preferences.currency}}">{{user_preferences.currency}}</option>
+                 {% endif %}
+
+                {% for currency in currencies %}
+                    <option name="currecy" value="{{currency.name}} - {{currency.value}}">{{currency.name}} - {{currency.value}}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-outline-secondary" type="submit">Save</button>
+        </div>
+    </form> -->
+    <form action="{% url 'preferences' %}" method="post">
+        {% csrf_token %}
+        <div class="input-group">
+            <select class="form-select" id="inputGroupSelect04" name="currency" aria-label="Example select with button addon">
+                <option value="" {% if not user_preferences.currency %}selected{% endif %}>Choose...</option>
+                {% for currency in currencies %}
+                    <option value="{{currency.name}} - {{currency.value}}" {% if user_preferences.currency == currency.name %}selected{% endif %}>{{currency.name}} - {{currency.value}}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-outline-secondary" type="submit">Save</button>
+        </div>
+    </form>
+    
+</div>
 <hr>
 
 
