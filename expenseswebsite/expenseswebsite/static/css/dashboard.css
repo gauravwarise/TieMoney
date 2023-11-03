@@ -46,3 +46,19 @@
   .navbar .form-control {
     padding: .75rem 1rem;
   }
+
+  .my-expense{
+    background-color: rgb(211, 211, 211);
+    padding: 20px 0px 20px 15px;
+    margin-top: 25px;
+  }
+  .add-expense-button{
+    padding: 11px 34px 12px 7px;
+    margin-top: 25px;
+  }
+  .breadcrumb .breadcrumb-item a{
+    text-decoration: none;
+  }
+
+
+  

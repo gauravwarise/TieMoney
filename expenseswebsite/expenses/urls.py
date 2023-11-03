@@ -1,7 +1,10 @@
 from django.urls import path
 from .import views 
+from django.contrib.auth.decorators import login_required
+
 urlpatterns=[
-    path('', views.index, name="expenses"),
+    path('', login_required(views.index), name="expenses"),
     path('add-expense', views.add_expense, name="add_expenses"),
+    path('edit-expense/<int:id>', views.expense_edit, name="edit_expenses"),
 
 ]

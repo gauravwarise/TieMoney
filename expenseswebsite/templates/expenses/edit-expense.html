@@ -6,7 +6,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'expenses' %}">Expenses</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add Expenses</li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Expenses</li>
         </ol>
     </nav>
     <div class="card">
@@ -25,6 +25,7 @@
                 <div class="form-group">
                     <label for="">Category</label>
                     <select class="form-control" name="category">
+                        <option selected name="category" value="{{values.category}}">{{values.category}}</option>
                         {% for category in categories%}
                         <option name="category" value="{{category.name}}">{{category.name}}</option>
                         {% endfor %}
@@ -35,7 +36,7 @@
                     <input type="date" class="form-control form-control-sm" name="expense_date" />
                 </div>
 
-                <input type="submit" value="Submit" class="btn btn-primary btn-primary-sm" />
+                <input type="submit" value="Save" class="btn btn-primary btn-primary-sm" />
             </form>
         </div>
     </div>
