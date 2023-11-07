@@ -178,3 +178,6 @@ class LogoutView(View):
 
 
         return redirect('login')
+
+
+        

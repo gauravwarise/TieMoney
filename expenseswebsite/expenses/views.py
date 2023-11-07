@@ -13,7 +13,7 @@ def index(request):
     print(request.user)
     categories = Category.objects.all()
     expenses = Expense.objects.filter(owner = request.user)
-    paginator = Paginator(expenses, 5)
+    paginator = Paginator(expenses, 3)
     page_number = request.GET.get('page')
     page_obj = Paginator.get_page(paginator,page_number)
     currency = UserPreferences.objects.get(user = request.user).currency
@@ -72,6 +72,40 @@ def expense_edit(request,id):
             'categories':categories
         }
         return render(request, 'expenses/edit-expense.html', context)
-    else:
-        messages.info(request,'Handling post form')
-        return render(request, 'expenses/edit-expense.html', context)
+    if request.method =='POST':
+        amount = request.POST['amount']
+        if not amount:
+            messages.error(request, 'Amount is required')
+            return render(request, 'expenses/edit-expenses.html', context)
+        description = request.POST['description']
+        date = request.POST['expense_date']
+        print("=====date", date)
+        category = request.POST['category']
+
+        if not description:
+            messages.error(request, 'description is required')
+            return render(request, 'expenses/edit-expenses.html', context)
+        try:
+            # Expense.objects.create(owner=request.user, amount=amount, date=date,
+            #                    category=category, description=description)
+
+            expense.owner=request.user
+            expense.amount=amount 
+            expense.date=date
+            expense.category=category 
+            expense.description=description
+
+            expense.save()
+            messages.success(request, 'Expense updated successfully')
+
+            return redirect('expenses')
+        except:
+            messages.error(request, 'something went wrong.. please enter valid credentials')
+            return render(request, 'expenses/edit-expenses.html', context)
+
+def delete_expense(request, id):
+    expense = Expense.objects.get(pk=id)
+    expense.delete()
+    messages.success(request, 'Expense removed')
+    return redirect('expenses')
+
