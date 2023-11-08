@@ -7,7 +7,7 @@ from userpreferences.models import UserPreferences
 import json
 from django.http import JsonResponse
 from django.db.models import Q
-
+from django.views.decorators.cache import never_cache
 
 # Create your views here.
 
@@ -29,7 +29,8 @@ def search_expenses(request):
 
 
 # @login_required(login_url='/authentication/login')
-@login_required
+# @login_required
+@never_cache
 def index(request):
     print("==========================session data",request.session)
     request.session['role'] = 'client'

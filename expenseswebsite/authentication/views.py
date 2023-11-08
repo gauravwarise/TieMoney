@@ -167,10 +167,12 @@ class LoginView(View):
 
 class LogoutView(View):
     def post(self, request):
+        print("before logut")
+        print("==========================session data after logout",request.session['username'])
         auth.logout(request)
         messages.success(request, "You have been lagged out")
         request.session.flush() 
-        print("==========================session data after logout",request.session)
+        # print("==========================session data after logout",request.session['username'])
         if not request.session:
             print("Session is empty.")
         else:
