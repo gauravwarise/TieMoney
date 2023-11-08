@@ -4,12 +4,37 @@ from .models import *
 from django.contrib import messages
 from django.core.paginator import Paginator
 from userpreferences.models import UserPreferences
+import json
+from django.http import JsonResponse
+from django.db.models import Q
+
 
 # Create your views here.
+
+def search_expenses(request):
+    if request.method == 'POST':
+        search_str = json.loads(request.body).get('searchText')
+        expenses = Expense.objects.filter(
+            Q(amount__icontains=search_str) | 
+            Q(date__icontains=search_str) | 
+            Q(description__icontains=search_str) | 
+            Q(category__icontains=search_str),
+            owner=request.user
+        )
+        data = expenses.values()
+        return JsonResponse(list(data), safe=False)
+
+
+
+
+
 # @login_required(login_url='/authentication/login')
 @login_required
 def index(request):
     print("==========================session data",request.session)
+    request.session['role'] = 'client'
+    request.session['username'] = str(request.user)
+    print("the session of user is >>>> ",request.session['username'])
     print(request.user)
     categories = Category.objects.all()
     expenses = Expense.objects.filter(owner = request.user)
@@ -23,6 +48,8 @@ def index(request):
         'currency':currency
     }
     user = request.user
+    
+
     if user.is_authenticated:
         return render(request, 'expenses/index.html', context)
     else:

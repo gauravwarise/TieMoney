@@ -135,3 +135,6 @@ MESSAGE_TAGS={
     messages.ERROR : 'danger'
 }
 LOGIN_URL = '/authentication/login'
+
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
+SESSION_COOKIE_SECURE = False

@@ -53,8 +53,14 @@
     margin-top: 25px;
   }
   .add-expense-button{
-    padding: 11px 34px 12px 7px;
-    margin-top: 25px;
+    /* padding: 11px 0px 15px 49px;
+    margin-top: 5px; */
+    display: flex;
+    justify-content: end;
+    padding: 0;
+  }
+  .add-expense-button a{
+    padding: 4px 12px;
   }
   .breadcrumb .breadcrumb-item a{
     text-decoration: none;

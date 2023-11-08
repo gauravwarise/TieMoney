@@ -30,6 +30,7 @@ emailField.addEventListener("keyup", (e) => {
         });
     }
   });
+console.log("yooooooooooooooooooo");
   
   
 
