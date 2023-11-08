@@ -139,9 +139,21 @@
     </li>
   </ul>
 
-  <div id="navbarSearch" class="navbar-search w-100 collapse">
-    <input class="form-control w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
+  <div style="margin-left: 100px;">
+    <a href="nav-link">
+      <h4 class="username">{{request.user.username}}</h4>
+    </a>
   </div>
+  
+ <div class="logout-button" style="margin-left: 150px;color: rgb(12, 12, 12); background-color: white; padding: 5px; margin-right: 160px;">
+  <form action="{% url 'logout' %}" method="POST">
+    <input  class="nav-link d-flex align-items-center gap-2" type="submit" value="Sign out">
+  </form>
+ </div>
+      
+    
+      
+   
 </header>
 
 <div class="container-fluid">
@@ -159,7 +171,7 @@
 
           <hr class="my-3">
 
-          <ul class="nav flex-column mb-auto">
+          <!-- <ul class="nav flex-column mb-auto">
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-2" href="#">
                 <svg class="bi"><use xlink:href="#gear-wide-connected"/></svg>
@@ -181,7 +193,7 @@
                 <svg class="bi"><use xlink:href="#door-closed"/></svg>
               </a> {% endcomment %}
             </li>
-          </ul>
+          </ul> -->
         </div>
       </div>
     </div>

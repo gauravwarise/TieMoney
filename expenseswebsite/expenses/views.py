@@ -39,7 +39,7 @@ def index(request):
     print(request.user)
     categories = Category.objects.all()
     expenses = Expense.objects.filter(owner = request.user)
-    paginator = Paginator(expenses, 3)
+    paginator = Paginator(expenses, 6)
     page_number = request.GET.get('page')
     page_obj = Paginator.get_page(paginator,page_number)
     currency = UserPreferences.objects.get(user = request.user).currency
