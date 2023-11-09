@@ -147,6 +147,7 @@
   
  <div class="logout-button" style="margin-left: 150px;color: rgb(12, 12, 12); background-color: white; padding: 5px; margin-right: 160px;">
   <form action="{% url 'logout' %}" method="POST">
+    {% csrf_token %}
     <input  class="nav-link d-flex align-items-center gap-2" type="submit" value="Sign out">
   </form>
  </div>

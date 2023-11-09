@@ -9,8 +9,9 @@ from django.http import JsonResponse
 from django.db.models import Q
 from django.views.decorators.cache import never_cache
 
-# Create your views here.
 
+# Create your views here.
+@never_cache
 def search_expenses(request):
     if request.method == 'POST':
         search_str = json.loads(request.body).get('searchText')
@@ -33,6 +34,7 @@ def search_expenses(request):
 @never_cache
 def index(request):
     print("==========================session data",request.session)
+    print(request.user.is_authenticated)
     request.session['role'] = 'client'
     request.session['username'] = str(request.user)
     print("the session of user is >>>> ",request.session['username'])
@@ -57,6 +59,7 @@ def index(request):
         return render(request, 'authentication/login')
     # return render(request, 'authentication/login')
 
+@never_cache
 def add_expense(request):
     categories = Category.objects.all()
     context = {
@@ -89,6 +92,7 @@ def add_expense(request):
             messages.error(request, 'something went wrong.. please enter valid credentials')
             return render(request, 'expenses/add_expenses.html', context)
 
+@never_cache
 def expense_edit(request,id):
     expense = Expense.objects.get(pk=id)
     categories = Category.objects.all()
@@ -130,7 +134,8 @@ def expense_edit(request,id):
         except:
             messages.error(request, 'something went wrong.. please enter valid credentials')
             return render(request, 'expenses/edit-expenses.html', context)
-
+            
+@never_cache
 def delete_expense(request, id):
     expense = Expense.objects.get(pk=id)
     expense.delete()

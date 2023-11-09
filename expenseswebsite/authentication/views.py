@@ -11,6 +11,8 @@ from django.contrib import messages
 # Create your views here.
 
 from django.contrib.auth.hashers import check_password
+from django.views.decorators.cache import never_cache
+
 
 
 
@@ -95,6 +97,7 @@ class LoginView(View):
         return render(request, 'authentication/login.html')
     
     def post(self, request):
+        print("====>",request.user.is_authenticated)
         username = request.POST['username']
         password = request.POST['password']
         print(username,password)
