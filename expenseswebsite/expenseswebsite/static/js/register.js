@@ -32,6 +32,10 @@ emailField.addEventListener("keyup", (e) => {
   });
 console.log("yooooooooooooooooooo");
   
+
+function redirectToLogin() {
+    window.location.href = "{% url 'login' %}";
+}
   
 
 
