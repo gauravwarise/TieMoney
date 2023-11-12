@@ -13,18 +13,17 @@
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="">Income</a></li>
                     <li class="breadcrumb-item active" aria-current="page">My Income</li>
+                    
                 </ol>
             </nav>
         </div>
         
 
         <div class="container">
-            {% include 'partials/_messages.html' %}
-            {% if income.count %}
             <div class="row align-items-center">
                 <div class="col-md-6"></div>
                 <div class="col-md-2 add-income-button">
-                    <a href="{% url 'add_income' %}" class="btn btn-primary">Add Income</a>
+                    <a href="{% url 'add-income' %}" class="btn btn-primary">Add Income</a>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
@@ -32,6 +31,8 @@
                     </div>
                 </div>
             </div>
+            {% include 'partials/_messages.html' %}
+            {% if income.count %}
             <div class="app-table">
                 <table class="table table-stripped table-hover">
                     <thead>
@@ -48,11 +49,11 @@
                         {% for income in page_obj %}
                         <tr>
                             <td>{{income.amount}}</td>
-                            <td>{{income.category}}</td>
+                            <td>{{income.source}}</td>
                             <td>{{income.description}}</td>
                             <td>{{income.date}}</td>
-                            <td><a href="{% url 'edit_expenses' expense.id %}" class="btn btn-secondary btn-sm">Edit</a></td>
-                            <td><a href="{% url 'delete_expenses' expense.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+                            <td><a href="{% url 'income-edit' income.id %}" class="btn btn-secondary btn-sm">Edit</a></td>
+                            <td><a href="{% url 'income-delete' income.id %}" class="btn btn-danger btn-sm">Delete</a></td>
                            
                         </tr>
                         {% endfor %}
@@ -112,8 +113,7 @@
     </div>
 </div>
 
-
-<script src="{% static 'js/searchExpenses.js' %}"></script>
+<script src="{% static 'js/searchIncome.js' %}"></script>
 
 {% endblock content %}
 

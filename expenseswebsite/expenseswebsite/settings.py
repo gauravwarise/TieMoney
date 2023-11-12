@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'authentication',
     'userpreferences',
     'userincome'
+    # 'userincome'
 ]
 
 MIDDLEWARE = [
