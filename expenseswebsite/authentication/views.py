@@ -54,9 +54,11 @@ class RegistrationView(View):
         }
 
         # messages.success(request, 'success whatsapp')
+        print("username===================", username)
 
         if not User.objects.filter(username=username).exists():
             if not User.objects.filter(email=email).exists():
+                print("insite condition===")
                 if len(password) < 6:
                     messages.error(request, 'Password too short')
                     return render(request, 'authentication/register.html', context)
@@ -88,8 +90,11 @@ class RegistrationView(View):
                 # )
                 # email.send(fail_silently=False)
                 messages.success(request, 'Account successfully created')
-                return render(request, 'authentication/register.html')
-
+                print('Account successfully created==============')
+                return render(request, 'authentication/login.html')
+            else:
+                messages.error(request, 'email is already in use')
+                return render(request, 'authentication/register.html', context)
         return render(request, 'authentication/register.html')
 
 class LoginView(View):

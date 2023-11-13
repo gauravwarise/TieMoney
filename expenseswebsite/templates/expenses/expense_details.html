@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3>Expense Details</h3>
+    <table class="table table-stripped">
+        <tr>
+            <th>Amount ({{ currency }})</th>
+            <td>{{ expense.amount }}</td>
+        </tr>
+        <tr>
+            <th>Category</th>
+            <td>{{ expense.category }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ expense.description }}</td>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <td>{{ expense.date }}</td>
+        </tr>
+        <!-- Add more details as needed -->
+    </table>
+    <a href="{% url 'expenses' %}" class="btn btn-primary">Back to Expenses</a>
+</div>
+{% endblock content %}

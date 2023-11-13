@@ -7,7 +7,9 @@ from userpreferences.models import UserPreferences
 import json
 from django.http import JsonResponse
 from django.db.models import Q
+from django.db.models import Sum
 from django.views.decorators.cache import never_cache
+from django.shortcuts import render, get_object_or_404
 import datetime
 
 
@@ -46,12 +48,28 @@ def index(request):
     paginator = Paginator(expenses, 6)
     page_number = request.GET.get('page')
     page_obj = Paginator.get_page(paginator,page_number)
-    currency = UserPreferences.objects.get(user = request.user).currency
+    # currency = UserPreferences.objects.get(user = request.user).currency
+    try:
+        currency = UserPreferences.objects.get(user=request.user)
+    except UserPreferences.DoesNotExist:
+    # Handle the case where UserPreferences does not exist for the user
+        currency = None  # Or create a new UserPreferences object if needed
+
+    total_expense = expenses.aggregate(Sum('amount'))['amount__sum'] or 0
+    categories_with_totals = (
+        expenses.values('category')
+                 .annotate(total_expense=Sum('amount'))
+                 .order_by('category')
+    )
+    print("expense list ================", list(expenses))
     context = {
         'expenses':expenses,
         'page_obj':page_obj,
-        'currency':currency
+        'currency':currency,
+        'total_expense':total_expense,
+        'categories_with_totals':categories_with_totals
     }
+    print(context)
     user = request.user
     
 
@@ -93,6 +111,30 @@ def add_expense(request):
         except:
             messages.error(request, 'something went wrong.. please enter valid credentials')
             return render(request, 'expenses/add_expenses.html', context)
+
+
+def expense_details(request, expense_id):
+    expense = get_object_or_404(Expense, id=expense_id, owner=request.user)
+
+    context = {
+        'expense': expense,
+    }
+    print("expense details ============",context)
+    return render(request, 'expenses/expense_details.html', context)
+
+def category_expenses(request, category):
+    category_expenses = Expense.objects.filter(owner=request.user, category=category)
+    total_expense = category_expenses.aggregate(Sum('amount'))['amount__sum'] or 0
+
+    context = {
+        'category': category,
+        'category_expenses': category_expenses,
+        'total_expense': total_expense,
+        'currency': UserPreferences.objects.get(user=request.user).currency,
+    }
+
+    return render(request, 'expenses/category_expenses.html', context)
+
 
 @never_cache
 def expense_edit(request,id):
@@ -144,7 +186,7 @@ def delete_expense(request, id):
     messages.success(request, 'Expense removed')
     return redirect('expenses')
 
-
+@never_cache
 def expense_category_summary(request):
     todays_date = datetime.date.today()
     six_months_ago = todays_date-datetime.timedelta(days=30*6)
@@ -171,7 +213,7 @@ def expense_category_summary(request):
 
     return JsonResponse({'expense_category_data': finalrep}, safe=False)
 
-
+@never_cache
 def stats_view(request):
     print("stats loaded ===================")
     return render(request, 'expenses/stats.html')
